@@ -98,11 +98,6 @@ class ImageExtractor:
         # Row-wise reading order: left-to-right within a row, then top-to-bottom.
         raw_images.sort(key=lambda item: (round(item["bbox"][1] / self._ROW_BIN), item["bbox"][0]))
 
-        # Nested under a per-page subfolder so a long document doesn't dump
-        # hundreds of crops into one flat directory. A pre-generated element
-        # id is still returned (as "element_id") so the caller can reuse the
-        # same id on the DocumentElement it builds, even though the filename
-        # itself stays positional (img_1.ext, img_2.ext, ...).
         page_dir = assets_dir / f"page_{page_number}"
         page_dir.mkdir(parents=True, exist_ok=True)
         page_images = []

@@ -40,7 +40,7 @@ def page_windows(
         window_pages = [
             PageContext(page_number=n, text=pages_by_number[n].markdown)
             for n in range(lo, hi + 1)
-            if n in pages_by_number  # defensive: tolerate a gap in page numbering, don't crash
+            if n in pages_by_number  # tolerate a gap in page numbering
         ]
         yield DocumentContext(
             document_id=markdown_document.document_id,

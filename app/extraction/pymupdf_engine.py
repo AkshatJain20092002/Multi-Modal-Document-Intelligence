@@ -40,7 +40,7 @@ from app.normalization.schema import (
 try:
     # import fitz  # PyMuPDF
     import pymupdf as fitz
-except ImportError:  # pragma: no cover
+except ImportError:
     fitz = None
 
 logger = logging.getLogger(__name__)
@@ -132,9 +132,6 @@ class PyMuPDFEngine(ExtractionEngine):
         return document
 
     def _extract_tables(self, pdf, document: Document) -> None:
-        """Whole-document LLM table extraction with cross-page merge. Skipped
-        entirely (not an error) when no OpenAI key is configured — table
-        extraction is a Tier 1 escalation, not a requirement to run milestone 1."""
         if not settings.openai_api_key:
             logger.info("table_extraction.skipped reason=no_openai_api_key")
             return

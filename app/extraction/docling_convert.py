@@ -107,18 +107,8 @@ def docling_document_to_normalized(
             except Exception:
                 table_data = None
         elif element_type == ElementType.IMAGE:
-            # Picture items carry no .text — their content is the crop itself.
-            # Requires generate_page_images/generate_picture_images=True
-            # upstream (see docling_engine.py); if that's ever off,
-            # get_image() returns None and this element is still kept (with
-            # asset_path=None) rather than silently dropped, so its
-            # presence/bbox/provenance is never lost.
             asset_path = _save_crop(item, page_no, "picture")
         elif element_type == ElementType.EQUATION:
-            # No local LaTeX recognition (deliberately — see _save_crop
-            # docstring); we just crop the formula region like a picture so
-            # nothing is lost. If .text happens to be populated (e.g. formula
-            # enrichment gets turned on later), keep it as latex too.
             asset_path = _save_crop(item, page_no, "formula")
             raw_text = getattr(item, "text", None)
             latex = raw_text.strip() if raw_text else None
@@ -127,9 +117,6 @@ def docling_document_to_normalized(
             if content is not None:
                 content = content.strip()
 
-        # Tables/pictures/equations are kept even with no recovered content —
-        # their presence (bbox, provenance) is still meaningful and shouldn't
-        # be silently discarded just because text recognition found nothing.
         if element_type not in (ElementType.TABLE, ElementType.IMAGE, ElementType.EQUATION) and not content:
             continue
 

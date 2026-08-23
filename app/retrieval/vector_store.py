@@ -112,8 +112,7 @@ def search(query_text: str, *, top_k: int = 5, document_id: str | None = None) -
             return []
         return client.query_points(collection_name=name, query=query_vector, limit=top_k).points
 
-    # No document_id given: search across every document's collection and
-    # merge by score, since there's no single collection to query anymore.
+    # No document_id given: search across every document's collection and merge by score, since there's no single collection to query anymore.
     all_hits: list[qmodels.ScoredPoint] = []
     for name in list_document_collections(client):
         all_hits.extend(client.query_points(collection_name=name, query=query_vector, limit=top_k).points)

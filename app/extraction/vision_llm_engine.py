@@ -34,10 +34,6 @@ from app.normalization.schema import (
     TableData,
 )
 
-# Deliberately excludes IMAGE/DIAGRAM/PAGE_NUMBER/DECORATIVE/UNKNOWN — a vision-LLM
-# transcription pass has nothing useful to say about those (no crop capability,
-# no reason to invent a classification), so they're left to the OCR engines that
-# actually produce assets/bboxes.
 _ELEMENT_TYPES = [
     "heading",
     "section_heading",

@@ -3,8 +3,6 @@ The relationship graph — NetworkX for V1 (per the accepted plan: do not make t
 graph DB the primary store of everything; it represents relationships, not content).
 Content/metadata live in the Document/DocumentElement Pydantic objects and, later,
 SQLite. This module only tracks edges between element/question/answer ids.
-
-Graduates to Neo4j only once traversal scale genuinely demands a server (V2+).
 """
 
 from __future__ import annotations

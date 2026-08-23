@@ -14,13 +14,6 @@ let it finish/fail on its own than silently swap engines mid-page. EasyOCR
 hardware. If an engine raises OR (for EasyOCR only) blows its time budget,
 the chain moves to the next one.
 
-Surya is deliberately not in this chain: its recognition backend needs a
-llama-server binary and, even when available, is a 650M-param VLM running on
-CPU — too slow to be a viable per-page fallback (see conversation/project
-notes). Marker was considered too but turned out to share the exact same
-llama.cpp/VLM backend as Surya under the hood, so it doesn't sidestep the
-problem either.
-
 Note on the timeout mechanism: EasyOCR runs in a worker thread so a slow call
 can be abandoned via future.result(timeout=...) without blocking the chain.
 Python can't forcibly kill a running thread, so a timed-out run keeps
@@ -78,7 +71,7 @@ class OCRChainEngine(ExtractionEngine):
                     "OCR chain: %s exceeded %.0fs budget on %s, falling back",
                     engine_name, timeout, path.name,
                 )
-            except Exception as exc:  # noqa: BLE001 - deliberately broad: any failure moves to next engine
+            except Exception as exc:
                 errors.append(f"{engine_name}: {exc}")
                 logger.warning("OCR chain: %s failed on %s: %s", engine_name, path.name, exc)
 
