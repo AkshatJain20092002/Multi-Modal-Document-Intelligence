@@ -32,6 +32,7 @@ class DoclingEngine(ExtractionEngine):
         from docling.datamodel.base_models import InputFormat
         from docling.datamodel.pipeline_options import (
             EasyOcrOptions,
+            OcrMode,
             PdfPipelineOptions,
             RapidOcrOptions,
         )
@@ -52,6 +53,16 @@ class DoclingEngine(ExtractionEngine):
         format_options: dict = {}
         if file_format in ("pdf", "image"):
             ocr_options = RapidOcrOptions() if self.ocr_backend == "rapidocr" else EasyOcrOptions()
+            # mode=FULL_PAGE forces OCR across the whole page instead of Docling's
+            # default of only OCR-ing regions with no native text cells. Confirmed
+            # by direct testing (not theoretical): this PDF family's font encodes
+            # the sqrt ("√") glyph without a valid Unicode mapping, so ANY
+            # text-layer read (PyMuPDF, Docling's default native-text mode,
+            # pymupdf4llm) drops it silently -- only a true pixel-level OCR pass
+            # recovers it. For scanned content this is a no-op (there's no native
+            # text layer to selectively skip in the first place), so it's safe to
+            # set unconditionally rather than only for native-text PDFs.
+            ocr_options.mode = OcrMode.FULL_PAGE
             pipeline_options = PdfPipelineOptions()
             pipeline_options.ocr_options = ocr_options
             # Without these, Docling silently emits picture/formula items with no
