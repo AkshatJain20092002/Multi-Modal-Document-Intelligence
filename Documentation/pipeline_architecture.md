@@ -33,8 +33,8 @@ stays checkable against the code, not just a description of intent.
        headings/tables/images/             one .md per page)
        equations/captions/metadata)               |
       export_pagewise.py                  export_markdown.py
-      ** kept for inspection only --      output/<doc_id>.markdown.json
-      nothing downstream reads it **              |
+                                     output/<doc_id>.markdown.json
+                                                   |
                                     +--------------+--------------+
                                     v                              v
                      app/retrieval/chunker.py        app/retrieval/page_window.py
