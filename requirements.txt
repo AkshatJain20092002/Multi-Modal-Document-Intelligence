@@ -1,0 +1,33 @@
+# Core
+pydantic>=2.12
+pydantic-settings>=2.12
+
+# Orchestration
+langgraph>=1.0
+langchain-openai>=1.1
+openai>=1.0
+
+# PDF / document parsing
+pymupdf>=1.26
+pymupdf4llm
+docling          # bundles rapidocr + easyocr as OCR backends
+docx2pdf
+
+# Graph / retrieval (V1: local, lightweight)
+networkx
+rank-bm25
+qdrant-client
+sentence-transformers   # local embeddings (BAAI/bge-small-en-v1.5), no API key
+
+# Utilities
+pillow
+numpy
+openpyxl   # .xlsx question bank export
+
+# Testing
+pytest
+
+##############################################
+
+# Additional for Testing
+# easyocr

@@ -1,0 +1,46 @@
+# Environment / secrets
+.env
+
+# Sample input documents — contains third-party copyrighted material
+# (e.g. CBSE / Sri Aurobindo Society branded worksheets), not redistributed
+sample_data/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Virtual environments
+venv/
+.venv/
+
+# Generated pipeline output (JSON, Markdown, assets, chunks, xlsx/csv, local vector DB)
+output/
+
+# Local vector store — also covered by output/, kept explicit in case the
+# configured path (settings.qdrant_path) ever points somewhere else
+qdrant_local/
+
+# Databases
+*.sqlite3
+
+# Logs
+*.log
+run_log.txt
+
+# Test / lint caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
