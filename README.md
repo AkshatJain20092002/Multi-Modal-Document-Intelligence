@@ -106,13 +106,6 @@ Copy the example file and fill in your key:
 cp .env.example .env
 ```
 
-| Variable | Required | Default | Purpose |
-|---|---|---|---|
-| `OPENAI_API_KEY` | Yes | — | Question detection, answer extraction, vision-OCR fallback |
-| `OPENAI_EXTRACTION_MODEL` | No | `gpt-4o-mini` | Primary model |
-| `OPENAI_REASONING_FALLBACK` | No | `gpt-4o` | Escalation model |
-| `LOG_LEVEL` | No | `INFO` | Logging verbosity |
-
 Everything else is configured in `app/config/settings.py` with working defaults —
 no other environment variables are required to run the pipeline.
 
