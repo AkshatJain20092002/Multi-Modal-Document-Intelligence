@@ -155,13 +155,6 @@ live in [`Documentation/`](Documentation/), starting with
 
 ## Future Improvements
 
-- Handle nested/reused question labels on a page more robustly (a page reusing the
-  same "(A)/(B)/(C)" for two unrelated question sets can currently confuse answer
-  attribution)
-- Full-scale validation across a large, varied multi-page document set
-- PPTX support
-- A lightweight review UI for the generated Question Bank
-
-## License
-
-Personal/private project — no license specified.
+- Validate LLM testing with ground-truth, relevance, faithfulness and latency.
+- Prevent advanced deterministic guardrails to handle edge cases.
+- Improve the model performance by maintaining a proper tradeoff between accuracy and cost efficienicy
